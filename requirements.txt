@@ -1,0 +1,52 @@
+Django==4.2.15
+
+gunicorn==22.0.0
+
+# for creating REST APIs
+djangorestframework==3.15.2
+
+# for swagger doc
+drf-yasg==1.21.8
+
+# token
+djangorestframework-simplejwt==5.3.1
+
+# for CORS
+django-cors-headers==4.1.0
+
+# for testing
+pytest==7.4.0
+pytest-django==4.5.2
+factory_boy==3.2.1
+pytest-cov==4.1.0
+
+# for code formatting
+black==22.8.0
+
+# postgresql support for Python
+psycopg2-binary==2.9.7
+
+# for getting env
+django-environ==0.10.0
+
+# python linter
+ruff==0.11.7
+
+# as name defined - for git pre-commit
+pre-commit==3.3.3
+
+# Freeze time for tests
+freezegun==1.2.2
+
+# celery for running jobs
+celery==5.3.4
+
+# run task on schedule
+django-celery-beat==2.5.0
+
+requests
+
+# for serving static files
+whitenoise==6.6.0
+
+redis==4.4.4

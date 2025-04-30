@@ -1,0 +1,52 @@
+version: '3'
+services:
+  bnpl-backend:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+      - ./staticfiles:/staticfiles
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  celery-worker:
+    build: .
+    command: celery -A core worker --loglevel=info -c 4
+    volumes:
+      - .:/app
+    depends_on:
+      - bnpl-backend
+      - redis
+
+  celery-beat:
+    build: .
+    command: celery -A core beat -l info -S django
+    volumes:
+      - .:/app
+    depends_on:
+      - bnpl-backend
+      - celery-worker
+      - redis
+  db:
+    image: postgres:17.0
+    container_name: bnpl_postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: bnpl_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+
+volumes:
+  pgdata:
