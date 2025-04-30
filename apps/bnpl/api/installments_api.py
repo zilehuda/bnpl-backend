@@ -70,12 +70,12 @@ class InstallmentPayAPIView(APIView):
         )
 
         if not installment:
-            Response(
+            return Response(
                 APIResponse.get_response(message="Installment not found"), status=404
             )
 
         if installment.status == IntallmentStatusChoices.paid.value:
-            Response(
+            return Response(
                 APIResponse.get_response(message="Installment already paid"), status=400
             )
 
@@ -83,7 +83,9 @@ class InstallmentPayAPIView(APIView):
         installment.paid_at = datetime.now()
         installment.save()
 
-        Response(APIResponse.get_response(message="Payment proceed successfully"))
+        return Response(
+            APIResponse.get_response(message="Payment proceed successfully")
+        )
 
 
 class UserInstallmentsAPIView(ListAPIView):
