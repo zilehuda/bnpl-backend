@@ -108,4 +108,4 @@ For production, we have to make DEBUG=off as well.
 ## Trade-offs and Known Limitations
 - More validations are required
 - More exceptions and error handling are needed
-
+- Right now, all installments are of one month period and total amount could be any, later on we can allow user to select period like monthly, quarterly, every 6 months and add restriction on minimum amount.
