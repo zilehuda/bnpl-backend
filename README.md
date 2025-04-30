@@ -91,13 +91,21 @@ python manage.py runserver
 
 Your application will be available at http://127.0.0.1:8000/.
 
+### Run Celery and Celery Beat (mac)
+For celery
+```
+celery -A core worker --loglevel=info -c 4
+```
+For celery beat
+```
+celery -A core beat -l info -S django
+```
+
+### Security
+I have secured the endpoints using JWT token, each route are protected base on user type.
+For production, we have to make DEBUG=off as well.
 
 ## Trade-offs and Known Limitations
+- More validations are required
+- More exceptions and error handling are needed
 
-I simplified date validation for invoice due dates to avoid timezone handling complexity. Consider improving this before production use.
-
-The app assumes a single currency (USD) for all transactions.
-
-Form validation is basic and may require enhancement for edge cases.
-
-Frontend state management is minimal and may become hard to maintain as the app grows.
